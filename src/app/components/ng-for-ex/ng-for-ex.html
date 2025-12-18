@@ -1,0 +1,144 @@
+<div class="row">
+    <div class="col-2">
+        <ul>
+            <li *ngFor="let item of cityList"> {{item}} </li>
+        </ul>
+        <br>
+        <ul>
+            @for (item of cityList; track $index) {
+            <li>{{item}}</li>
+            }
+        </ul>
+
+    </div>
+    <div class="col-2">
+        <div>
+            <button *ngFor="let roll of rollNoList"> {{roll}}</button>
+            <br>
+            <br>
+            @for (item of rollNoList; track $index) {
+            <button> {{item}}</button>
+            }
+        </div>
+    </div>
+    <div class="col-3">
+        <input *ngFor="let roll of rollNoList" [value]="roll" type="text">
+    </div>
+    <div class="col-3">
+        <select>
+            <option *ngFor="let city of cityList"> {{city}}</option>
+        </select>
+    </div>
+    <div class="col-3">
+        <select *ngFor="let city of cityList">
+            <option *ngFor="let cityName of cityList"> {{cityName}}</option>
+        </select>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Sr No</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Status</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let stud of studentList;let srNo = index;let isFirst = first;let isLast = last">
+                    <td> {{srNo +1}}</td>
+                    <td>{{stud.name}}</td>
+                    <td>{{stud['city']}}</td>
+                    <td>
+                        <input type="checkbox" [checked]="stud.isActive">
+                        <input type="checkbox" [(ngModel)]="stud.isActive">
+                    </td>
+                    <td>
+                        {{stud.isActive ? 'Active':'De-Active'}}
+                    </td>
+                    <td>
+                        <!-- <span class="text-success" *ngIf="stud.isActive">Student is Active</span>
+                        <span class="text-danger" *ngIf="!stud.isActive">Student is De-Active</span> -->
+
+                        <span [ngClass]="stud.isActive == true ?'text-success':'text-danger'">{{stud.isActive ?'Student is Active':'Stud is De-Active' }}</span>
+                    </td>
+                    <td>
+                        @if (stud.isActive) {
+                        <span class="text-success">Student is Active</span>
+                        } @else {
+                        <span class="text-danger">Student is De-Active</span>
+                        }
+                    </td>
+                    <td>
+                        {{isFirst}} -- {{isLast}}
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-6">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Sr No</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Status</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody >
+                @for (stud of studentList; track $index;let isFirst = $first;let isLast = $last ) { 
+                <tr>
+                    @let fullname = stud.name + ' ' + stud.surname;
+                    <td> {{$index +1}}</td>
+                    <td>{{fullname}}</td>
+                    <td>{{stud['city']}}</td>
+                    <td>
+                        <input type="checkbox" [checked]="stud.isActive">
+                        <input type="checkbox" [(ngModel)]="stud.isActive">
+                    </td>
+                    <td>
+                        {{stud.isActive ? 'Active':'De-Active'}}
+                    </td>
+                    <td>
+                        <span class="text-success" *ngIf="stud.isActive">Student is Active</span>
+                        <span class="text-danger" *ngIf="!stud.isActive">Student is De-Active</span>
+                    </td>
+                    <td>
+                        @if (stud.isActive) {
+                        <span class="text-success">Student is Active</span>
+                        } @else {
+                        <span class="text-danger">Student is De-Active</span>
+                        }
+                    </td>
+                    <td>
+                        {{isFirst}} -- {{isLast}}
+                    </td>
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-8">
+        <div class="row">
+            <div class="col-3" *ngFor="let student of studentList">
+                <div class="card mt-2">
+                    <div class="card-body">
+                        <h4 class="card-title">{{student.name}}</h4>
+                        <p class="card-text">{{student.city}}</p>
+                        <a href="#" class="card-link">{{student.isActive}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

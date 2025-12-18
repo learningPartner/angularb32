@@ -1,0 +1,39 @@
+<p>get-apiex works!</p>
+<button (click)="getPhotosData()">Get Photos</button>
+<button (click)="getUsers()">Get User</button>
+<button (click)="getBusVendorS()">Get Vendors</button>
+<button (click)="getALlClients()">Get Clint</button>
+<div class="row">
+    <div class="col-5">
+        <ul>
+            @for (item of photosList(); track $index) {
+                 <li>{{item.title}} - {{item.url}}</li>
+            }
+           
+        </ul>
+    </div>
+    <div class="col-3">
+        <ul>
+            @for (item of userlist(); track $index) {
+                 <li>{{item.name}} - {{item.website}}</li>
+            }
+           
+        </ul>
+    </div>
+    <div class="col-3">
+        <ul>
+            @for (item of vendorList(); track $index) {
+                 <li> {{item.vendorName}} - {{item.contactNo}}</li>
+            }
+           
+        </ul>
+    </div>
+      <div class="col-3">
+        <ul>
+            @for (item of clinetList(); track $index) {
+                 <li> {{item.clientName}} </li>
+            }
+           
+        </ul>
+    </div>
+</div>

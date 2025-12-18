@@ -1,0 +1,118 @@
+<div class="row">
+    <div class="col-3">
+        <input type="text" [(ngModel)]="enteredMarks" placeholder="Enter MArks Out of 100">
+    </div> 
+    <div class="col-3">
+        @if (enteredMarks != 0 && enteredMarks <= 35) {
+             @let name ="sdsd";
+             @let mmm ="asdas";
+             @let addharPatten = /\d+/;
+             {{addharPatten.test('22') ? 'Not a Num':'Is Num'}}
+             
+            <span class="text-danger"> {{name}}</span> 
+        } @else if (enteredMarks >35 && enteredMarks <=50) {
+            <span class="text-primary">Student Has C grade</span>
+        } @else if (enteredMarks > 50 && enteredMarks<= 75) {
+             <span class="text-warning">Student Has B grade</span>
+        } @else if(enteredMarks >75) {
+             <span class="text-success">Student Has A grade</span>
+        } @else {
+            <span>Enter Marks</span>
+        }
+
+        <span class="text-danger" *ngIf="enteredMarks != 0 && enteredMarks <= 35">Student Failed</span>
+        <span class="text-primary" *ngIf="enteredMarks >35 && enteredMarks <=50">Student Has C grade</span>
+        <span class="text-warning" *ngIf="enteredMarks > 50 && enteredMarks<= 75">Student Has B grade</span>
+        <span class="text-success" *ngIf="enteredMarks >75">Student Has A grade</span>
+        <span *ngIf="enteredMarks == 0">Enter Marks</span>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-3">-{{isDiv1Visiable}}
+        <div *ngIf="isDiv1Visiable" class="bg-danger p-4">
+            Div 1
+        </div>
+        @if(isDiv1Visiable) {
+        <div class="bg-primary p-4">
+            Div 111
+        </div>
+        }
+    </div>
+    <div class="col-3">
+        <div *ngIf="num1 == num2" class="bg-primary p-4">
+            Div 2 -- {{num1}}- {{num2}}
+        </div>
+        @if (num1 == num2) {
+        <div class="bg-primary p-4">
+            Div 2 -- {{num1}}- {{num2}}
+        </div>
+        }
+    </div>
+    <div class="col-3">
+        <div *ngIf="true" class="bg-danger p-3">
+            Div 3
+        </div>
+    </div>
+    <div class="col-3">
+        <div *ngIf="isActive" class="bg-warning p-3">
+            Div 4
+        </div>
+    </div>
+</div>
+<hr>
+
+
+<div class="row">
+    <div class="col-3 text-center">
+        <button class="btn btn-success" (click)="showDiv1()">Show</button>
+        <button class="btn btn-danger" (click)="hideDiv1()">Hide</button>
+        <br>
+        <button class="btn btn-primary" (click)="toggleDiv1()">Toggle</button>
+    </div>
+    <div class="col-3">
+        <input type="text" [(ngModel)]="num1" placeholder="Num1 ">
+        <input type="text" [(ngModel)]="num2" placeholder="Num 2 ">
+    </div>
+    <div class="col-3">
+        --{{isActive}}
+    </div>
+    <div class="col-3">
+        <input type="checkbox" [(ngModel)]="isActive">
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-4">
+        <textarea [(ngModel)]="details" maxlength="20" placeholder="Enter Detail" rows="3"></textarea>
+
+        <!-- <span *ngIf="details.length >= 20" class="text-danger">Max 20 char Aloowed </span>
+        <span *ngIf="details.length < 20 " class="text-success">Input Is Valid </span>  -->
+       
+        <span> {{details.length >= 20 ? 'Max 20 char Aloowed': 'Input Is Valid'}}</span>
+        
+        <!-- @if (details.length >= 20) {
+        <span  >Max 20 char Aloowed </span>
+        } @else {
+        <span  >Input Is Valid </span>
+        } -->
+    </div>
+    <div class="col-3">
+        <select [(ngModel)]="selectedCaste" class="form-select">
+            <option>Open</option>
+            <option>SC_NT</option>
+            <option>OBC</option>
+            <option>OTHER</option>
+        </select>
+    </div>
+    <div class="col-3" *ngIf="selectedCaste == 'OTHER'">
+        <input type="text" placeholder="Other Caste ">
+    </div>
+    <div class="col-3">
+        <input type="text" [disabled]="selectedCaste !== 'OTHER'" placeholder="Other Caste ">
+    </div>
+</div>
+
+<hr>

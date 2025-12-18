@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-3">
+        pName => {{pName}}
+        <br>
+        <input type="text" [value]="pName">
+        <br>
+        <input type="text" [value]="pPrice">
+    </div>
+    <div class="col-3">
+        {{productName()}}
+        <br>
+        <input type="text" [value]="productPrice()">
+    </div>
+    <div class="col-3">
+        {{studentObj().name}}
+    </div>
+    <div class="col-3">
+        {{cityList()}}
+        <br>
+        {{cityList()[0]}}
+    </div>
+</div>
+ 
+
+<div class="row">
+    <div class="col-3">
+        <button (click)="chnagePnAMe()"> chnage pName</button>
+    </div>
+    <div class="col-3">
+
+    </div>
+</div>

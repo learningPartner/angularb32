@@ -1,0 +1,112 @@
+<div class="row">
+    <div class="col-3">
+        course => <span> {{course}}</span>
+    </div>
+    <div class="col-2">
+        {{couserDuaration}}
+    </div>
+    <div class="col-2">
+        <h1>{{startDate}}</h1>
+    </div>
+    <div class="col-2">
+        with inetpolcation
+        <input type="text" class="form-control" value="{{course}}">
+    </div>
+    <div class="col-2">
+        with ngmodel
+        <input type="text"  class="form-control" [(ngModel)]="course">
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        with propertty bindig
+        <input type="text" placeholder="" minlength="" [value]="course">
+    </div>
+    <div class="col-3">
+        <input type="text" [placeholder]="myPlaceholderText">
+    </div>
+    <div class="col-3">
+        <input [type]="inputType">
+    </div>
+    <div [class]="dangeclassName">
+        <input type="{{inputType}}">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-3">
+        <button class="btn btn-success" (click)="showWelcome()">SHow</button>
+    </div>
+    <div class="col-3">
+        <button class="btn btn-danger" (click)="changeCourse()">Chnage course</button>
+    </div>
+    <div class="col-3">
+        <select (change)="onCityChnage()">
+            <option value="">Nagpue</option>
+            <option value="">Pune</option>
+            <option value="">Mumabi</option>
+        </select>
+    </div>
+    <div class="col-4">
+        <button class="btn btn-success" (click)="setCoureName('Dot Net')">Dot net</button>
+        <button class="btn btn-success" (click)="setCoureName('Java')">Java</button>
+        <button class="btn btn-success" (click)="setCoureName('Php')">Php</button>
+        <button class="btn btn-success" (click)="setCoureName('Reactjs')">Reactjs</button>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-3">
+        <input type="checkbox" [(ngModel)]="isAcitve"> -- {{isAcitve}}
+    </div>
+    <div class="col-3">
+        <select [(ngModel)]="selectedState">
+            <option value="ngp">Nagpue</option>
+            <option value="pn">Pune</option>
+            <option value="mum">Mumabi</option>
+        </select> -- {{selectedState}}
+    </div>
+    <div class="col-3">--{{selectedGender}}--
+        <input type="radio" value="male" name="gender" [(ngModel)]="selectedGender"> Male
+        <input type="radio" value="female" name="gender" [(ngModel)]="selectedGender"> Fe-Male
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-3">
+        <input type="text" [(ngModel)]="studentObj.studName" placeholder="Name">
+    </div>
+    <div class="col-3">
+         <input type="text" [(ngModel)]="studentObj.mobile" placeholder="mobile" >
+    </div>
+    <div class="col-3">
+         <input type="text"  [(ngModel)]="studentObj.email" placeholder="conatct">
+    </div>
+    <div class="col-12">
+        {{studentObj.studName}} -- {{studentObj.mobile}} ++ {{studentObj.email}} 
+    </div>
+</div>
+<hr>
+
+<div class="row">
+    <div class="col-3">
+        <input type="text" [(ngModel)]="cityList[0]"  placeholder="CIty 1">
+    </div>
+    <div class="col-3">
+         <input type="text" [(ngModel)]="cityList[1]" placeholder="city 2" >
+    </div>
+</div>
+---{{cityList}}
+<hr>
+<hr>
+<textarea [(ngModel)]="address" rows="5"></textarea>
+<br>
+{{address}}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
