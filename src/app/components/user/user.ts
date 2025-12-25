@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, inject, OnChanges, OnDestroy, OnInit, signal } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, inject, OnChanges, OnDestroy, OnInit, signal, SimpleChanges } from '@angular/core';
 import { Field, form, required } from '@angular/forms/signals';
 import { VendorService } from '../../services/vendor-service';
 
