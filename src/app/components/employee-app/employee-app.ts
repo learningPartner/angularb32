@@ -1,10 +1,11 @@
+import { JsonPipe, NgClass } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-app',
-  imports: [FormsModule],
+  imports: [FormsModule,JsonPipe,NgClass],
   templateUrl: './employee-app.html',
   styleUrl: './employee-app.css',
 })
@@ -22,11 +23,18 @@ export class EmployeeApp implements OnInit {
     "employeeType": "",
     "salary": 0
   }
+
+  courseName: string = "Angular";
+  courseDuration = signal<string>("2 Months")
+
   http = inject(HttpClient);
-  deptmentList = signal<any[]>([])
+
+  deptmentList = signal<any[]>([]);
+
   designationList = signal<any[]>([]);
 
   ngOnInit(): void {
+   
     this.getDepartment()
   }
 

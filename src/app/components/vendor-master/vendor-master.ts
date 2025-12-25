@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { VendorService } from '../../services/vendor-service';
+import { Utility } from '../../services/utility';
+import { Alerts } from '../../services/alerts';
 
 @Component({
   selector: 'app-vendor-master',
@@ -8,10 +11,14 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './vendor-master.html',
   styleUrl: './vendor-master.css',
 })
+
 export class VendorMaster implements OnInit {
 
-  http = inject(HttpClient);
+  private http = inject(HttpClient);
   vendorList = signal<any[]>([]);
+
+  utiltiySrv =  inject(Utility)
+
 
   newVendorObj: any = {
     vendorId: 0,
@@ -20,34 +27,69 @@ export class VendorMaster implements OnInit {
     emailId: ""
   };
 
+  alertServ =  inject(Alerts)
 
-  constructor() {
+  constructor(private vendorSrv: VendorService) {
     debugger;
+    const resulul1 =  this.utiltiySrv.getSum(1,3,5);
+
+    const result2 =  this.utiltiySrv.getSum(2,4,6,7,8,9);
+
+    const result3 = this.utiltiySrv.getSumIOf2Num(2,3)
+    
+
+    const appNewNAme  =  this.utiltiySrv.appName;
+
+    this.utiltiySrv.appName = "Aggular App"
+
   }
+
   ngOnInit(): void {
     debugger;
     this.getAllVendors()
   }
 
+  // getAllVendors() {
+  //   debugger;
+  //   this.http.get("https://api.freeprojectapi.com/api/BusBooking/GetBusVendors").subscribe({
+  //     next: (result: any) => {
+  //       this.vendorList.set(result);
+  //     }
+  //   })
+  // }
+
   getAllVendors() {
     debugger;
-    this.http.get("https://api.freeprojectapi.com/api/BusBooking/GetBusVendors").subscribe({
-      next: (result: any) => {
-        this.vendorList.set(result);
+    this.vendorSrv.getAllVendorsList().subscribe({
+      next: (res: any) => {
+        debugger;
+        this.vendorList.set(res);
       }
     })
   }
 
   saveNewVendor() {
     const newObj = {}
-    this.http.post("https://api.freeprojectapi.com/api/BusBooking/PostBusVendor", this.newVendorObj).subscribe({
-      next: (res: any) => {
+    // this.http.post("https://api.freeprojectapi.com/api/BusBooking/PostBusVendor", this.newVendorObj).subscribe({
+    //   next: (res: any) => {
+    //     debugger;
+    //       alert("Vendor Created Sucess");
+    //       this.getAllVendors()
+    //   },
+    //   error: (error: any) => {
+    //     debugger;
+    //     alert("API Error")
+    //   }
+    // })
+    debugger;
+    this.vendorSrv.saveVendor(this.newVendorObj).subscribe({
+      next: (result: any) => {
         debugger;
-          alert("Vendor Created Sucess");
-          this.getAllVendors()
+       // alert("Vendor Created Sucess");
+        this.alertServ.showSuccess("Vendor Created Sucess")
+        this.getAllVendors()
       },
       error: (error: any) => {
-        debugger;
         alert("API Error")
       }
     })
@@ -63,7 +105,7 @@ export class VendorMaster implements OnInit {
       next: (res: any) => {
         alert("Vendor Details Updated")
         this.getAllVendors()
-      },error:(error)=>{
+      }, error: (error) => {
         alert(error.meesage)
       }
     })
@@ -73,13 +115,20 @@ export class VendorMaster implements OnInit {
     const isDelete = confirm("Are you Sure want to Delete");
     debugger;
     if (isDelete) {
-      this.http.delete("https://api.freeprojectapi.com/api/BusBooking/DeleteBusVendor?id=" + id).subscribe({
-        next: (result) => {
+      // this.http.delete("https://api.freeprojectapi.com/api/BusBooking/DeleteBusVendor?id=" + id).subscribe({
+      //   next: (result) => {
+      //     alert("Vendor  Deleted")
+      //     this.getAllVendors()
+      //   }
+      // })
+      this.vendorSrv.deleteVendorById(id).subscribe({
+        next: (res: any) => {
+           debugger;
           alert("Vendor  Deleted")
           this.getAllVendors()
         }
       })
-    } 
+    }
 
   }
 }

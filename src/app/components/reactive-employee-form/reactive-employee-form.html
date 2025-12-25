@@ -22,19 +22,20 @@
                             </thead>
                             <tbody>
                                 @for (item of employeeList(); track $index) {
-                                    <tr>
+                                <tr>
                                     <td>{{$index+1}}</td>
                                     <td>{{item.fullName}}</td>
                                     <td>{{item.email}}</td>
                                     <td>{{item.gender}}</td>
                                     <td>{{item.departmentName}}</td>
-                                    <td>{{item.designationName}}</td> 
+                                    <td>{{item.designationName}}</td>
                                     <td>
-                                        <button class="btn btn-sm btn-primary" (click)="editEmployee(item.employeeId)">Edit</button>
+                                        <button class="btn btn-sm btn-primary"
+                                            (click)="editEmployee(item.employeeId)">Edit</button>
                                         <button class="btn btn-sm btn-danger">Delete</button>
                                     </td>
                                 </tr>
-                                } 
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -52,17 +53,44 @@
                     <form [formGroup]="employeeForm">
                         <div class="mb-3">
                             <label for="fullName" class="form-label">Full Name</label>
-                            <input type="text" formControlName="fullName" class="form-control" id="fullName" placeholder="Enter full name">
+                            <input type="text" formControlName="fullName" class="form-control" id="fullName"
+                                placeholder="Enter full name">
+                                touched - {{employeeForm.controls['fullName'].touched}} <br>
+                                dirty - {{employeeForm.controls['fullName'].dirty}} <br>
+                            @if(employeeForm.controls['fullName'].touched) {
+                            <div class="text-danger">
+                                <!-- --{{eName.errors | json}} -->
+                                @if(employeeForm.controls['fullName'].errors?.['required']){
+                                <span>This is Required</span>
+                                }
+                                @if(employeeForm.controls['fullName'].errors?.['minlength']) {
+                                <span> Min 3 Char Needed</span>
+                                }
+                            </div>
+                            }
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" formControlName="email" class="form-control" id="email" placeholder="Enter email">
+                            <input type="email" formControlName="email" class="form-control" id="email"
+                                placeholder="Enter email">
+                                   @if(employeeForm.controls['email'].touched) {
+                            <div class="text-danger">
+                                <!-- --{{eName.errors | json}} -->
+                                @if(employeeForm.controls['email'].errors?.['required']){
+                                <span>This is Required</span>
+                                }
+                                @if(employeeForm.controls['email'].errors?.['email']) {
+                                <span> Email id is not Correct</span>
+                                }
+                            </div>
+                            }
                         </div>
 
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone</label>
-                            <input type="tel" formControlName="phone" class="form-control" id="phone" placeholder="Enter phone number">
+                            <input type="tel" formControlName="phone" class="form-control" id="phone"
+                                placeholder="Enter phone number">
                         </div>
 
                         <div class="mb-3">
@@ -82,8 +110,9 @@
 
                         <div class="mb-3">
                             <label for="departmentId" class="form-label">Department</label>
-                            <select class="form-control" formControlName="departmentId" (change)="getDesignationByDeptId()" id="departmentId">
-                                <option value="">Select Department  </option>
+                            <select class="form-control" formControlName="departmentId"
+                                (change)="getDesignationByDeptId()" id="departmentId">
+                                <option value="">Select Department </option>
                                 @for (item of deptmentList(); track $index) {
                                 <option [value]="item.departmentId"> {{item.departmentName}}</option>
                                 }
@@ -112,11 +141,12 @@
 
                         <div class="mb-3">
                             <label for="salary" class="form-label">Salary</label>
-                            <input type="number" formControlName="salary" class="form-control" id="salary" placeholder="Enter salary">
+                            <input type="number" formControlName="salary" class="form-control" id="salary"
+                                placeholder="Enter salary">
                         </div>
 
                         <div class="d-grid gap-2">
-                            <button type="button" (click)="onSaveEmp()" class="btn btn-success">Save Employee</button>
+                            <button type="button" [disabled]="employeeForm.invalid" (click)="onSaveEmp()" class="btn btn-success">Save Employee</button>
                             <button type="reset" class="btn btn-secondary">Clear</button>
                         </div>
                     </form>

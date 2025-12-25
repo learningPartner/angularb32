@@ -1,1 +1,52 @@
-<p>data-types works!</p>
+<div class="row">
+    <div class="col-3">
+        courseName => {{courseName}} 
+        <br>
+        upprseacase => {{courseName | uppercase}}
+    </div>
+    <div class="col-3">
+        lower CAse => {{courseName | lowercase}}
+    </div>
+    <div class="col-3">
+        title CAse => {{courseName | titlecase}}
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-3">
+        currentDate => {{currentDate}} 
+        <br>
+        date => {{currentDate |date}}
+    </div>
+    <div class="col-3">
+       dd-MM-yy =>{{currentDate| date:'dd-MM-yy'}} <br>
+       dd-MMM-yy =>{{currentDate| date:'dd-MMM-yy'}} <br>
+       dd-MMMM-yy =>{{currentDate| date:'dd-MMMM-yy'}}<br>
+       dd-MMMM-yy =>{{currentDate| date:'dd-MM-yyyy'}} <br>
+        dd/MMMM/yy =>{{currentDate| date:'dd/MM/yyyy'}}<br>
+        dd/MMMM/yy =>{{currentDate| date:'dd+MM+yyyy'}} <br>
+         dd/MMMM/yy =>{{currentDate| date:'MMM+dd+yyyy'}}
+    </div>
+    <div class="col-3">
+        hh:mm:ss =>{{currentDate| date:'hh:mm:ss'}}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-3">
+        roll no=> {{rollNoList}}
+        <br>
+        slice => {{rollNoList|slice:2}}
+         <br>
+        slice => {{rollNoList|slice:2:6}}
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-4">
+        employeeObject=> {{employeeObject}}
+    </div>
+    <div class="col-4">
+        {{employeeObject|json}}
+    </div>
+</div>

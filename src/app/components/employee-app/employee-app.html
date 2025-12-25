@@ -13,10 +13,10 @@
                 <tr>
                   <th>ID</th>
                   <th>Full Name</th>
-                  <th>Email</th> 
+                  <th>Email</th>
                   <th>Gender</th>
                   <th>Department</th>
-                  <th>Designation</th> 
+                  <th>Designation</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -34,7 +34,7 @@
                     <button class="btn btn-sm btn-primary">Edit</button>
                     <button class="btn btn-sm btn-danger">Delete</button>
                   </td>
-                </tr> 
+                </tr>
               </tbody>
             </table>
           </div>
@@ -49,60 +49,90 @@
           <h5 class="mb-0">Add/Edit Employee</h5>
         </div>
         <div class="card-body">
-           
+          <form #formRef="ngForm"> 
             <div class="mb-3">
               <label for="fullName" class="form-label">Full Name</label>
-              <input type="text" class="form-control" [(ngModel)]="newEmpObj.fullName" id="fullName" placeholder="Enter full name">
+              <input type="text" [ngClass]="((eName.touched || eName.dirty) && (eName.errors?.['required'] || eName.errors?.['minlength'] )) ? 'field-error':'' "  class="form-control" #eName="ngModel" [(ngModel)]="newEmpObj.fullName" name="fullName"  required
+                minlength="4" maxlength="10" placeholder="Enter full name">
+                =={{eName.touched }} --- {{eName.dirty}}  
+              @if(eName.touched || eName.dirty) {
+              <div class="text-danger">                <!-- --{{eName.errors | json}} -->
+                @if(eName.errors?.['required']){
+                <span>This is Required</span>
+                }
+                @if(eName.errors?.['minlength']) {
+                <span> Min 4 Char Needed</span>
+                }
+              </div>
+              }
             </div>
-
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" [(ngModel)]="newEmpObj.email" id="email" placeholder="Enter email">
+              <input type="email" class="form-control" #email="ngModel" [(ngModel)]="newEmpObj.email" name="email"  required
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" maxlength="30" placeholder="Enter email">
+              <div class="text-danger">
+                @if(email.errors?.['required']) {
+                <span>This is Mandatory</span>
+                }
+                @if(email.errors?.['pattern']) {
+                <span>Email id is not Correct</span>
+                }
+              </div>
             </div>
-
             <div class="mb-3">
               <label for="phone" class="form-label">Phone</label>
-              <input type="tel" class="form-control" [(ngModel)]="newEmpObj.phone" id="phone" placeholder="Enter phone number">
+              <input type="text" class="form-control" #phone="ngModel" pattern="^[a-zA-Z0-9]+$"
+                [(ngModel)]="newEmpObj.phone" name="phone"  id="phone" placeholder="Enter phone number">
+              <div class="text-danger">
+                @if(phone.errors?.['pattern']) {
+                <span>No Special Char Allowed</span>
+                }
+              </div>
             </div>
 
             <div class="mb-3">
               <label for="gender" class="form-label">Gender</label>
-              <select class="form-control" [(ngModel)]="newEmpObj.gender" id="gender">
+              <select class="form-control" [(ngModel)]="newEmpObj.gender" name="gender"  id="gender">
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
               </select>
             </div>
+               <div class="mb-3">
+              <label for="dateOfJoining" class="form-label">Upload Photo</label>
+              <input type="file" class="form-control"   name="dateOfJoining"  id="dateOfJoining">
+            </div>
 
             <div class="mb-3">
               <label for="dateOfJoining" class="form-label">Date of Joining</label>
-              <input type="date" class="form-control" [(ngModel)]="newEmpObj.dateOfJoining" id="dateOfJoining">
+              <input type="date" class="form-control" [(ngModel)]="newEmpObj.dateOfJoining" name="dateOfJoining"  id="dateOfJoining">
             </div>
 
             <div class="mb-3">
               <label for="departmentId" class="form-label">Department</label>
-              <select class="form-control" (change)="getDesignationByDeptId()" [(ngModel)]="newEmpObj.departmentId" id="departmentId">
+              <select class="form-control" (change)="getDesignationByDeptId()" name="departmentId"  [(ngModel)]="newEmpObj.departmentId"
+                id="departmentId">
                 <option value="">Select Department -{{newEmpObj.departmentId}}</option>
                 @for (item of deptmentList(); track $index) {
-                    <option [value]="item.departmentId"> {{item.departmentName}}</option>
+                <option [value]="item.departmentId"> {{item.departmentName}}</option>
                 }
               </select>
             </div>
 
             <div class="mb-3">
               <label for="designationId" class="form-label">Designation</label>
-              <select class="form-control" [(ngModel)]="newEmpObj.designationId" id="designationId">
-                <option value="">Select Designation</option> 
+              <select class="form-control" [(ngModel)]="newEmpObj.designationId" name="designationId"  id="designationId">
+                <option value="">Select Designation</option>
                 @for (item of designationList(); track $index) {
-                    <option [value]="item.designationId"> {{item.designationName}}</option>
+                <option [value]="item.designationId"> {{item.designationName}}</option>
                 }
               </select>
             </div>
 
             <div class="mb-3">
               <label for="employeeType" class="form-label">Employee Type</label>
-              <select class="form-control" [(ngModel)]="newEmpObj.employeeType" id="employeeType">
+              <select class="form-control" [(ngModel)]="newEmpObj.employeeType" name="employeeType"  id="employeeType">
                 <option value="">Select Type</option>
                 <option value="Full-Time">Full-Time</option>
                 <option value="Part-Time">Part-Time</option>
@@ -112,14 +142,16 @@
 
             <div class="mb-3">
               <label for="salary" class="form-label">Salary</label>
-              <input type="number" class="form-control" [(ngModel)]="newEmpObj.salary" id="salary" placeholder="Enter salary">
+              <input type="number" class="form-control" name="salary" [(ngModel)]="newEmpObj.salary" id="salary"
+                placeholder="Enter salary">
             </div>
 
             <div class="d-grid gap-2">
-              <button type="submit" class="btn btn-success">Save Employee</button>
+              --{{formRef.invalid}}
+              <button type="submit" [disabled]="formRef.invalid" class="btn btn-success">Save Employee</button>
               <button type="reset" class="btn btn-secondary">Clear</button>
             </div>
-           
+          </form>
         </div>
       </div>
     </div>

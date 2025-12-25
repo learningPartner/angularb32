@@ -1,8 +1,9 @@
+import { DatePipe, JsonPipe, LowerCasePipe, SlicePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-data-types',
-  imports: [],
+  imports: [UpperCasePipe, LowerCasePipe, TitleCasePipe,JsonPipe, DatePipe, SlicePipe],
   templateUrl: './data-types.html',
   styleUrl: './data-types.css',
 })
@@ -11,7 +12,7 @@ export class DataTypes {
   //string | undefined | number | array | booelan | date | null | Object | NaN
   //any
   //declartion  + Initialiazation
-  courseName: string = "Angular b 32";
+  courseName: string = "Angular b 32 from SCRATCH";
   courseDuration = "4 Months";
   //coourseCapacity; 
 
@@ -23,13 +24,30 @@ export class DataTypes {
   isPresent = true;
 
   currentDate: Date = new Date();
-   
+
   student: any;
 
   employeeObject: any = {
-    name: "Ram",
-    contact:'11223344',
-    email:'ram@gmail.com'
+    name: 'Rahul',
+    empid: 22332,
+    emailId: 'rahul@gmail.com',
+    aadharCard: 232313123123,
+    address: {
+      city: 'Pune',
+      state: 'MH',
+      pincode: '221122',
+      adddressLine1: 'Near SBI Bank',
+      permanentAddress: {
+        city: 'Mumbai',
+        pincode: '2222',
+        state: 'MH'
+      }
+    },
+    contactNo: [
+      "9988998800",
+      "8877887788"
+    ],
+    isActive: true
   }
 
   productObj = {
@@ -37,24 +55,24 @@ export class DataTypes {
     price: 12000
   }
 
-  cityList: string[] = ["Pune","Nagpur", "Mumabi"];
-  rollNoList: number [] = [111,112,113,114,115];
+  cityList: string[] = ["Pune", "Nagpur", "Mumabi"];
+  rollNoList: number[] = [111, 112, 113, 114, 115, 444, 555, 666, 777, 888];
 
   couserStartDate: string | undefined;
   cosureProject?: string;
-  schoolObj : any | null;
+  schoolObj: any | null;
   studnetName!: string;
 
   num1 = 12;
-  num2 :any = "ABC";
-  
+  num2: any = "ABC";
+
   constructor() {
     debugger;
     this.schoolObj = "asdas";
-    const result =  this.num1 - this.num2;
+    const result = this.num1 - this.num2;
     debugger;
+
     console.log("Constru Executed");
-    this.courseName = "123";
     this.isActive = true;
     this.cityList.push("Solpaur");
     console.log(this.cityList)
@@ -63,13 +81,12 @@ export class DataTypes {
     console.log(this.employeeObject['email'])
 
     this.student = "Rahul";
-    this.student =  true;
+    this.student = true;
     this.student = 3344;
     // this.coourseCapacity = "ABC";
     // this.coourseCapacity = 123;
     // this.coourseCapacity = true; 
-    //this.couserStartDate = "Started from Niov";
-    this.currentDate = new Date("12-12-2025");
+    //this.couserStartDate = "Started from Niov"; 
 
     console.log(this.courseDuration)
     console.log(this.isActive)

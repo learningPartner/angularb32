@@ -8,15 +8,25 @@ import { GetAPIEx } from './components/get-apiex/get-apiex';
 import { VendorMaster } from './components/vendor-master/vendor-master';
 import { EmployeeApp } from './components/employee-app/employee-app';
 import { ReactiveEmployeeForm } from './components/reactive-employee-form/reactive-employee-form';
+import { DataTypes } from './components/data-types/data-types';
+import { User } from './components/user/user';
 
 export const routes: Routes = [
     {
         path: 'databinding',
         component: DataBinding
     },
+        {
+        path: 'data-types',
+        component: DataTypes
+    },
     {
         path: 'ng-for-example',
         component: NgForEx
+    },
+    {
+        path: 'user-page',
+        component: User
     },
     {
         path: 'ng-if-ex',

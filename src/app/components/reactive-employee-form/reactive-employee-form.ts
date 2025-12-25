@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Utility } from '../../services/utility';
 
 @Component({
   selector: 'app-reactive-employee-form',
@@ -17,11 +18,13 @@ export class ReactiveEmployeeForm {
   employeeList = signal<any[]>([]);
   currentEditEmployeeName = signal<string>('');
 
+  utilitySr  =  inject(Utility);
+
   employeeForm: FormGroup = new FormGroup({
     employeeId: new FormControl(0),
-    fullName: new FormControl(""),
-    email: new FormControl(""),
-    phone: new FormControl(""),
+    fullName: new FormControl("",[Validators.required,Validators.minLength(3)]),
+    email: new FormControl("",[Validators.required,Validators.email]),
+    phone: new FormControl("",[Validators.required,Validators.pattern('^[a-zA-Z0-9]+$')]),
     gender: new FormControl(""),
     dateOfJoining: new FormControl(""),
     departmentId: new FormControl(""),
@@ -31,6 +34,11 @@ export class ReactiveEmployeeForm {
   })
 
   ngOnInit(): void {
+    debugger;
+    const appName= this.utilitySr.appName;
+     setTimeout(() => {
+      this.employeeForm.controls['fullName'].setValue("test")
+    }, 3000);
     this.getAllEmployee()
     this.getDepartment()
   }
