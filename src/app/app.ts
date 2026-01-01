@@ -33,12 +33,12 @@ export class App {
     // filter || find || icnludes || indexOf || lastIndex
 
     const fromData = EmployeeFormData;
-    debugger;
+    
     fromData.forEach(item => {
       const newControl = new FormControl();
       this.employeeForm.addControl(item.formControlName, newControl)
     })
-    debugger;
+    
 
 
   }

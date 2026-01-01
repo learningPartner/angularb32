@@ -15,17 +15,17 @@ export class VendorService {
   apiUrl: string = "https://api.freeprojectapi.com/api/BusBooking/";
 
   getAllVendorsList() {
-    debugger;
+    
     return this.http.get(this.apiUrl + "GetBusVendors")
   }
 
   saveVendor(obj:any) {
-    debugger;
+    
     return this.http.post(this.apiUrl + "PostBusVendor", obj)
   }
 
   deleteVendorById(id: number) {
-    debugger;
+    
     return this.http.delete(this.apiUrl + "DeleteBusVendor?id=" +id)
   }
   

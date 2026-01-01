@@ -1,3 +1,7 @@
+<app-alert [alertType]="alertType" [alertMessage]="'Api call Fails'"></app-alert>
+
+<br>
+<app-alert [alertType]="'Warning'" [alertMessage]="'Duplicate Aadhar Not Alalwed'"></app-alert>
 <div class="row">
     <div class="col-2">
         <ul>
@@ -35,14 +39,16 @@
         </select>
     </div>
 </div>
-
+<strong>{{coursernMAe}}</strong>
+<input type="text" [(ngModel)]="coursernMAe" name="" id="">
 <div class="row">
-    <div class="col-6">
+    <div class="col-12">
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Sr No</th>
+                    <th title="Sr No Help text">Sr No</th>
                     <th>Name</th>
+                    <th>Surname</th>
                     <th>City</th>
                     <th>Status</th>
                     <th></th>
@@ -52,8 +58,17 @@
             <tbody>
                 <tr *ngFor="let stud of studentList;let srNo = index;let isFirst = first;let isLast = last">
                     <td> {{srNo +1}}</td>
-                    <td>{{stud.name}}</td>
-                    <td>{{stud['city']}}</td>
+                    <!-- <td>{{stud.name}} {{stud.middleName}} {{stud.surname}}</td> -->
+                    <td>{{stud|fullName}}</td>
+                    <td>{{stud.surname | napipe:'na'}}</td>
+                    <td>{{stud['city'] }}</td>
+                    <td>
+                        <app-progress-bar [progressColorClassName]="'bg-success'" [progressValue]="stud.attendancePer"></app-progress-bar>
+                    </td>
+
+                    <!-- <td>
+                        <app-show-less-more [sampleText]="stud['address']" [textLimit]="20"></app-show-less-more>
+                    </td> -->
                     <td>
                         <input type="checkbox" [checked]="stud.isActive">
                         <input type="checkbox" [(ngModel)]="stud.isActive">
@@ -61,11 +76,11 @@
                     <td>
                         {{stud.isActive ? 'Active':'De-Active'}}
                     </td>
-                    <td>
-                        <!-- <span class="text-success" *ngIf="stud.isActive">Student is Active</span>
-                        <span class="text-danger" *ngIf="!stud.isActive">Student is De-Active</span> -->
+                    <!-- <td>
+                      
 
-                        <span [ngClass]="stud.isActive == true ?'text-success':'text-danger'">{{stud.isActive ?'Student is Active':'Stud is De-Active' }}</span>
+                        <span [ngClass]="stud.isActive == true ?'text-success':'text-danger'">{{stud.isActive ?'Student is Active':'Stud is De-Active' }}
+                            </span>
                     </td>
                     <td>
                         @if (stud.isActive) {
@@ -73,7 +88,7 @@
                         } @else {
                         <span class="text-danger">Student is De-Active</span>
                         }
-                    </td>
+                    </td> -->
                     <td>
                         {{isFirst}} -- {{isLast}}
                     </td>
@@ -82,7 +97,7 @@
             </tbody>
         </table>
     </div>
-    <div class="col-6">
+    <!-- <div class="col-6">
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -140,5 +155,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

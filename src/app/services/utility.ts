@@ -8,7 +8,7 @@ export class Utility {
   appName: string = "Demo App"
 
   getSumIOf2Num(num1: number, num2: number  ) {
-    debugger;
+    
     return num1 +  num2;
   }
 
@@ -17,7 +17,7 @@ export class Utility {
   }
 
   getSum(...rest:number[]) {
-     debugger;
+     
     let sum = 0;
     for (let index = 0; index < rest.length; index++) {
        sum =  sum + rest[index]

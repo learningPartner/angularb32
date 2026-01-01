@@ -1,8 +1,55 @@
-<p>admin works!</p>
+ 
+ <app-show-less-more [sampleText]="sampleText" [textLimit]="100"> </app-show-less-more>
+<app-alert [alertType]="'Success'" [alertMessage]="'This is Smaple text from Admin'"></app-alert>
 
-<h1>Admin Page</h1>
+<app-tabs 
+[tabList]="['Employee Basic Data','Projects','Bank Details','Family Details']" 
+[activeTabName]="'Projects'"
+(onTabChange)="onTabChnages($event)"
+>
 
-<button>Save</button>
+</app-tabs>
 
-<app-user></app-user>
+<button [type]="'button'"   id="btnew"  >Save User</button>
 
+<app-progress-bar [progressValue]="30" [progressColorClassName]="'bg-danger'"></app-progress-bar>
+
+<br>
+
+<div class="rpw">
+    <div class="col-3">
+        <input type="text" #textRef>
+    </div>
+    <div class="col-3">
+        <button (click)="readText()">Read Text</button>
+    </div>
+</div>
+<!-- 
+<button type="button" (click)="openModel()" class="btn btn-primary">
+  Open modal
+</button> -->
+
+<!-- The Modal -->
+<div class="modal" #modalRef>
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+         Welcome to 2026
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

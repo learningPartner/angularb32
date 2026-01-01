@@ -1,0 +1,12 @@
+@if (isToggle) {
+<p>{{sampleText | napipe:'--'}}</p>
+} @else {
+<p>{{sampleText | slice:0:textLimit}}</p>
+}
+
+
+@if(sampleText && sampleText.length > textLimit) {
+<button (click)="onToggleText()">
+    {{isToggle == true ? 'Show Less': 'Show More'}}
+</button>
+}

@@ -48,10 +48,10 @@ export class GetAPIEx {
   }
 
   getUsers() {
-    debugger;
+    
     this.http.get("https://jsonplaceholder.typicode.com/users").subscribe((Res:any)=>{
       this.userlist.set(Res);
-      debugger;
+      
     })
   }
 

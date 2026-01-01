@@ -1,0 +1,8 @@
+<ul class="nav nav-tabs">
+    @for (item of tabList; track $index) {
+    <li class="nav-item ">
+        <!-- --{{activeTabName}} ++ {{item}} = {{activeTabName == item}} -->
+        <a class="nav-link" [ngClass]="activeTabName == item ? 'active' : '' " (click)="setCurrentTab(item)">{{item}}</a>
+    </li>
+    } 
+</ul>

@@ -41,7 +41,7 @@ export class EmployeeApp implements OnInit {
   getDepartment() {
     this.http.get("https://api.freeprojectapi.com/api/EmployeeApp/GetDepartments").subscribe({
       next:(res:any)=>{
-        debugger;
+        
         this.deptmentList.set(res)
       }
     })

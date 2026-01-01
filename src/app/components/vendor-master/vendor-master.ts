@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { VendorService } from '../../services/vendor-service';
 import { Utility } from '../../services/utility';
 import { Alerts } from '../../services/alerts';
+import { NaPipe } from '../../pipes/na-pipe';
+import { Highlight } from '../../directives/highlight';
 
 @Component({
   selector: 'app-vendor-master',
-  imports: [FormsModule],
+  imports: [FormsModule,NaPipe,Highlight],
   templateUrl: './vendor-master.html',
   styleUrl: './vendor-master.css',
 })
@@ -30,7 +32,7 @@ export class VendorMaster implements OnInit {
   alertServ =  inject(Alerts)
 
   constructor(private vendorSrv: VendorService) {
-    debugger;
+    
     const resulul1 =  this.utiltiySrv.getSum(1,3,5);
 
     const result2 =  this.utiltiySrv.getSum(2,4,6,7,8,9);
@@ -45,12 +47,12 @@ export class VendorMaster implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger;
+    
     this.getAllVendors()
   }
 
   // getAllVendors() {
-  //   debugger;
+  //   
   //   this.http.get("https://api.freeprojectapi.com/api/BusBooking/GetBusVendors").subscribe({
   //     next: (result: any) => {
   //       this.vendorList.set(result);
@@ -59,10 +61,10 @@ export class VendorMaster implements OnInit {
   // }
 
   getAllVendors() {
-    debugger;
+    
     this.vendorSrv.getAllVendorsList().subscribe({
       next: (res: any) => {
-        debugger;
+        
         this.vendorList.set(res);
       }
     })
@@ -72,19 +74,19 @@ export class VendorMaster implements OnInit {
     const newObj = {}
     // this.http.post("https://api.freeprojectapi.com/api/BusBooking/PostBusVendor", this.newVendorObj).subscribe({
     //   next: (res: any) => {
-    //     debugger;
+    //     
     //       alert("Vendor Created Sucess");
     //       this.getAllVendors()
     //   },
     //   error: (error: any) => {
-    //     debugger;
+    //     
     //     alert("API Error")
     //   }
     // })
-    debugger;
+    
     this.vendorSrv.saveVendor(this.newVendorObj).subscribe({
       next: (result: any) => {
-        debugger;
+        
        // alert("Vendor Created Sucess");
         this.alertServ.showSuccess("Vendor Created Sucess")
         this.getAllVendors()
@@ -113,7 +115,7 @@ export class VendorMaster implements OnInit {
 
   onDelete(id: number) {
     const isDelete = confirm("Are you Sure want to Delete");
-    debugger;
+    
     if (isDelete) {
       // this.http.delete("https://api.freeprojectapi.com/api/BusBooking/DeleteBusVendor?id=" + id).subscribe({
       //   next: (result) => {
@@ -123,7 +125,7 @@ export class VendorMaster implements OnInit {
       // })
       this.vendorSrv.deleteVendorById(id).subscribe({
         next: (res: any) => {
-           debugger;
+           
           alert("Vendor  Deleted")
           this.getAllVendors()
         }

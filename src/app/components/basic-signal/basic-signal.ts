@@ -24,7 +24,7 @@ export class BasicSignal {
 
   constructor() {
     setTimeout(() => {
-      debugger;
+      
       this.pName = "Camera"; 
     }, 5000);
 

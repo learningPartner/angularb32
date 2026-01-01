@@ -67,10 +67,10 @@ export class DataTypes {
   num2: any = "ABC";
 
   constructor() {
-    debugger;
+    
     this.schoolObj = "asdas";
     const result = this.num1 - this.num2;
-    debugger;
+    
 
     console.log("Constru Executed");
     this.isActive = true;

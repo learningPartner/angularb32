@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Utility } from '../../services/utility';
+import { Tabs } from "../../resuableComponent/tabs/tabs";
 
 @Component({
   selector: 'app-reactive-employee-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, Tabs],
   templateUrl: './reactive-employee-form.html',
   styleUrl: './reactive-employee-form.css',
 })
@@ -19,6 +20,9 @@ export class ReactiveEmployeeForm {
   currentEditEmployeeName = signal<string>('');
 
   utilitySr  =  inject(Utility);
+
+  tabs: string[]= ['Employee List', 'Employee Form'];
+  currentTab: string = this.tabs[0];
 
   employeeForm: FormGroup = new FormGroup({
     employeeId: new FormControl(0),
@@ -34,7 +38,7 @@ export class ReactiveEmployeeForm {
   })
 
   ngOnInit(): void {
-    debugger;
+    
     const appName= this.utilitySr.appName;
      setTimeout(() => {
       this.employeeForm.controls['fullName'].setValue("test")
@@ -43,6 +47,10 @@ export class ReactiveEmployeeForm {
     this.getDepartment()
   }
 
+  getCurrentTab(tab: string) {
+    
+    this.currentTab = tab;
+  }
 
   getAllEmployee() {
     this.http.get(this.commanApiUrl + "GetEmployees").subscribe({
@@ -53,10 +61,11 @@ export class ReactiveEmployeeForm {
   }
 
   editEmployee(id: number) {
-    debugger;
+    
+    this.currentTab = this.tabs[1];
     this.http.get(`${this.commanApiUrl}${id}`).subscribe({
       next: (res: any) => {
-        debugger;
+        
         this.employeeForm = new FormGroup({
           employeeId: new FormControl(res.employeeId),
           fullName: new FormControl(res.fullName),
@@ -76,13 +85,13 @@ export class ReactiveEmployeeForm {
   getDepartment() {
     this.http.get(`${this.commanApiUrl}GetDepartments`).subscribe({
       next: (res: any) => {
-        debugger;
+        
         this.deptmentList.set(res)
       }
     })
   }
   getDesignationByDeptId() {
-    debugger;
+    
     const deptId = this.employeeForm.controls['departmentId'].value;
     this.http.get(this.commanApiUrl + "GetDesignationsByDeptId?deptId=" + deptId).subscribe({
       next: (res: any) => {
@@ -93,7 +102,7 @@ export class ReactiveEmployeeForm {
 
 
   onSaveEmp() {
-    debugger;
+    
     const formValue = this.employeeForm.value;
 
     this.http.post(this.commanApiUrl + "CreateEmployee", formValue).subscribe({

@@ -10,6 +10,7 @@ import { EmployeeApp } from './components/employee-app/employee-app';
 import { ReactiveEmployeeForm } from './components/reactive-employee-form/reactive-employee-form';
 import { DataTypes } from './components/data-types/data-types';
 import { User } from './components/user/user';
+import { Admin } from './components/admin/admin';
 
 export const routes: Routes = [
     {
@@ -43,6 +44,10 @@ export const routes: Routes = [
     {
         path:'employeeapp',
         component: EmployeeApp
+    },
+    {
+        path:'admin',
+        component: Admin
     },
     {
         path:'signal-basic',

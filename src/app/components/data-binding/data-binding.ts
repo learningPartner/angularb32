@@ -40,7 +40,7 @@ export class DataBinding {
     console.log(this.couserDuaration)
     setTimeout(() => {
       this.course = "";
-      debugger;
+      
     }, 5000);
   }
 
